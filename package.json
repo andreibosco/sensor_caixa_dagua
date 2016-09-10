@@ -1,0 +1,14 @@
+{
+ "name" : "SensorCaixaDagua",
+  "version" : "0.0.1",
+  "description" : "Monitoramento de nivel da caixa dagua utilizando C.H.I.P. e MQTT",
+  "license" : "Apache-2.0",
+  "repository" : {
+    "type" : "git",
+    "url"  : "https://github.com/andreibosco/sensor_caixa_dagua.git"
+  },
+  "dependencies": {
+    "chip-gpio" : "1.1.0",
+    "mqtt"	: "1.14.1"
+  }
+}
