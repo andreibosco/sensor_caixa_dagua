@@ -11,7 +11,7 @@ var feed = 'sensorCaixaDagua';
 var topicWill = adafruit_username+'/feeds/'+feed+'_status';
 var topic = adafruit_username+'/feeds/'+feed;
 
-var minutes = 1, interval = minutes * 60 * 1000;
+var minutes = 5, interval = minutes * 60 * 1000;
 
 var mqttServer = 'mqtt://io.adafruit.com';
 var mqttClient = mqtt.connect(mqttServer, {
@@ -23,24 +23,13 @@ var mqttClient = mqtt.connect(mqttServer, {
   }
 });
 
+mqttClient.publish(topicWill, 'OK');
+
 setInterval(function() {
   sensorValue = sensor.read();
   console.log('Leitura: ' + sensorValue);
-  mqttClient.publish(topicWill, 'OK');
   mqttClient.publish(topic, sensorValue.toString());
 }, interval);
-
-/*
-sensor.watch(function (err, value) {
-  if (err) {
-    throw err;
-  }
-  sensorValue = sensor.read();
-  console.log('Leitura: ' + sensorValue);
-  mqttClient.publish(topicWill, 'OK');
-  mqttClient.publish(topic, sensorValue.toString());
-});
-*/
 
 function exit() {
   sensor.unexport();
