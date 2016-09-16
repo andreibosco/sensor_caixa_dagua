@@ -25,10 +25,16 @@ var mqttClient = mqtt.connect(mqttServer, {
 
 mqttClient.publish(topicWill, 'OK');
 
-setInterval(function() {
+function sensorRead() {
   sensorValue = sensor.read();
   console.log('Leitura: ' + sensorValue);
   mqttClient.publish(topic, sensorValue.toString());
+};
+
+sensorRead();
+
+setInterval(function() {
+  sensorRead();
 }, interval);
 
 function exit() {
